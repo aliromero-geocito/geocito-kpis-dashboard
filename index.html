@@ -1,0 +1,339 @@
+<title>Geocito KPIs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple-900: #2a1b42;
+    --purple-700: #5a3a96;
+    --purple-500: #8a63d1;
+    --purple-300: #c6aeee;
+    --purple-100: #f1e9fc;
+    --lavender-50: #fbf9fe;
+    --gray-600: #6b6478;
+    --gray-300: #dcd6e6;
+    --white: #ffffff;
+    --good: #1f8a5f;
+    --warn: #b5790e;
+    --critical: #c1443a;
+    --ig: #935bc7;
+    --ig-soft: rgba(147, 91, 199, 0.14);
+    --fb: #5a6fd8;
+    --fb-soft: rgba(90, 111, 216, 0.14);
+    --tt: #c14f8f;
+    --tt-soft: rgba(193, 79, 143, 0.14);
+
+    --bg: linear-gradient(180deg, #f7f2fd 0%, var(--lavender-50) 340px);
+    --bg-solid: var(--lavender-50);
+    --surface: var(--white);
+    --rail: var(--purple-100);
+    --ink: var(--purple-900);
+    --ink-secondary: var(--gray-600);
+    --border: var(--gray-300);
+    --accent: var(--purple-700);
+    --accent-soft: var(--purple-500);
+    --grid: #eae3f6;
+    color-scheme: light;
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #1a1224;
+    --bg-solid: #1a1224;
+    --surface: #241934;
+    --rail: #2f2144;
+    --ink: #f3edfb;
+    --ink-secondary: #b8aecb;
+    --border: #3c2e54;
+    --accent: #c3a9f2;
+    --accent-soft: #8f6fce;
+    --good: #4fbf8d;
+    --warn: #e0a83f;
+    --critical: #e0736a;
+    --grid: #362850;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { background: var(--bg-solid); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-color: var(--bg-solid);
+    color: var(--ink);
+    font-family: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 1040px; margin: 0 auto; padding: 2.75rem 1.5rem 4rem; }
+
+  header.top {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+    gap: 0.75rem 1.5rem; margin-bottom: 0.5rem;
+  }
+  h1 {
+    font-family: "Fraunces", Georgia, serif; font-weight: 600;
+    font-size: clamp(1.8rem, 3.2vw, 2.5rem); letter-spacing: -0.01em; margin: 0; text-wrap: balance;
+  }
+  .meta { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: var(--ink-secondary); }
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.28rem 0.7rem;
+    border-radius: 999px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.01em;
+  }
+  .status-pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .status-good { background: color-mix(in srgb, var(--good) 16%, transparent); color: var(--good); }
+  .status-warn { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
+
+  .error-banner {
+    background: color-mix(in srgb, var(--warn) 10%, var(--surface));
+    border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+    border-radius: 12px; padding: 0.9rem 1.1rem; margin: 1.25rem 0; font-size: 0.88rem;
+  }
+  .error-banner ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+
+  .hero {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 22px;
+    padding: 1.75rem 1.75rem 1.25rem; margin: 1.75rem 0 1.75rem;
+  }
+  .hero-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 0.5rem 1.5rem; }
+  .hero-label { font-size: 0.82rem; color: var(--ink-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .hero-number { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(2.4rem, 6vw, 3.4rem); line-height: 1; letter-spacing: -0.02em; }
+  .hero-legend { display: flex; gap: 1.1rem; flex-wrap: wrap; font-size: 0.82rem; color: var(--ink-secondary); }
+  .hero-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .swatch { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+  section.platform {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    overflow: hidden; margin-bottom: 1.5rem;
+    opacity: 0; transform: translateY(10px);
+    animation: rise 0.5s ease forwards;
+  }
+  section.platform:nth-of-type(1) { animation-delay: 0.03s; }
+  section.platform:nth-of-type(2) { animation-delay: 0.09s; }
+  section.platform:nth-of-type(3) { animation-delay: 0.15s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    section.platform { animation: none; opacity: 1; transform: none; }
+  }
+
+  .platform-head {
+    display: flex; align-items: center; gap: 0.75rem; padding: 1.1rem 1.5rem;
+    background: var(--rail); border-bottom: 1px solid var(--border);
+  }
+  .platform-head .dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+  .platform-head h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 1.2rem; margin: 0; }
+  .platform-head .handle { font-size: 0.85rem; color: var(--ink-secondary); }
+
+  .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+  .chart-col { background: var(--surface); padding: 1.2rem 1.5rem 0.8rem; }
+  .chart-title { font-size: 0.78rem; color: var(--ink-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+  @media (max-width: 720px) { .charts-row { grid-template-columns: 1fr; } }
+
+  .chart-wrap { position: relative; }
+  .trend-svg, .bars-svg { display: block; overflow: visible; }
+  .grid-line { stroke: var(--grid); stroke-width: 1; }
+  .axis-label { font-size: 9px; fill: var(--ink-secondary); font-family: "Public Sans", sans-serif; }
+  .pt { stroke: var(--surface); stroke-width: 1.5; }
+  .pt-last { stroke-width: 2; }
+  .hit { cursor: pointer; }
+  .hit:hover ~ .pt-last { r: 6; }
+  .chart-tip {
+    position: absolute; top: -4px; right: 0; background: var(--ink); color: var(--bg-solid);
+    font-size: 0.72rem; padding: 0.3rem 0.55rem; border-radius: 8px; pointer-events: none;
+    white-space: nowrap; font-weight: 600;
+  }
+  .chart-delta { font-size: 0.78rem; margin-top: 0.3rem; font-weight: 600; }
+  .delta-up { color: var(--good); }
+  .delta-down { color: var(--critical); }
+  .delta-flat { color: var(--ink-secondary); }
+  .chart-empty {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--ink-secondary); font-size: 0.82rem; text-align: center; gap: 0.4rem;
+  }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--border); }
+  .tile { background: var(--surface); padding: 1.1rem 1.5rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .tile-label { font-size: 0.75rem; color: var(--ink-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+  .tile-value { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 1.5rem; letter-spacing: -0.01em; }
+
+  .placeholder { padding: 1rem 1.5rem 1.3rem; color: var(--ink-secondary); font-size: 0.85rem; }
+
+  footer {
+    margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    font-size: 0.82rem; color: var(--ink-secondary); display: flex; flex-wrap: wrap;
+    justify-content: space-between; gap: 0.5rem;
+  }
+</style>
+
+<div class="page">
+  <header class="top">
+    <h1>Geocito &mdash; Panel de KPIs de redes sociales</h1>
+    <div class="meta">
+      <span class="status-pill status-good">Actualizado</span>
+      <span>Actualizado: 26/08/2026, 23:03 UTC</span>
+    </div>
+  </header>
+
+  
+
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="hero-label">Seguidores combinados</div>
+        <div class="hero-number">13 889</div>
+      </div>
+      <div class="hero-legend">
+        <span><span class="swatch" style="background:var(--ig)"></span>Instagram 3 322</span>
+        <span><span class="swatch" style="background:var(--fb)"></span>Facebook 5 310</span>
+        <span><span class="swatch" style="background:var(--tt)"></span>TikTok 5 257</span>
+      </div>
+    </div>
+    <div class="chart-empty" style="height:170px">
+      <svg viewBox="0 0 980 170" width="100%" height="170" preserveAspectRatio="none">
+        <circle cx="966" cy="85.0" r="5" fill="var(--accent)"/>
+      </svg>
+      <p>Primera medición (26 ago). Vuelve mañana para ver la tendencia.</p>
+    </div>
+  </div>
+
+  <section class="platform">
+    <div class="platform-head">
+      <span class="dot" style="background:var(--ig)"></span>
+      <h2>Instagram</h2>
+      <span class="handle">@geocito.pe</span>
+    </div>
+    <div class="charts-row">
+      <div class="chart-col">
+        <div class="chart-title">Seguidores en el tiempo</div>
+        <div class="chart-empty" style="height:180px">
+      <svg viewBox="0 0 560 180" width="100%" height="180" preserveAspectRatio="none">
+        <circle cx="546" cy="90.0" r="5" fill="var(--ig)"/>
+      </svg>
+      <p>Primera medición (26 ago). Vuelve mañana para ver la tendencia.</p>
+    </div>
+      </div>
+      <div class="chart-col">
+        <div class="chart-title">Ganancia diaria de seguidores</div>
+        <div class="chart-empty" style="height:110px">
+      <p>Necesitamos al menos 2 días de historial para mostrar la ganancia diaria. Vuelve mañana.</p>
+    </div>
+      </div>
+    </div>
+    <div class="tiles">
+      <div class="tile">
+        <div class="tile-label">Alcance (24h)</div>
+        <div class="tile-value">5 709</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Cuentas con interacción</div>
+        <div class="tile-value">166</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Visitas al perfil</div>
+        <div class="tile-value">369</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="platform">
+    <div class="platform-head">
+      <span class="dot" style="background:var(--fb)"></span>
+      <h2>Facebook</h2>
+      <span class="handle">Geocito</span>
+    </div>
+    <div class="charts-row">
+      <div class="chart-col">
+        <div class="chart-title">Seguidores en el tiempo</div>
+        <div class="chart-empty" style="height:180px">
+      <svg viewBox="0 0 560 180" width="100%" height="180" preserveAspectRatio="none">
+        <circle cx="546" cy="90.0" r="5" fill="var(--fb)"/>
+      </svg>
+      <p>Primera medición (26 ago). Vuelve mañana para ver la tendencia.</p>
+    </div>
+      </div>
+      <div class="chart-col">
+        <div class="chart-title">Ganancia diaria de seguidores</div>
+        <div class="chart-empty" style="height:110px">
+      <p>Necesitamos al menos 2 días de historial para mostrar la ganancia diaria. Vuelve mañana.</p>
+    </div>
+      </div>
+    </div>
+    <div class="tiles">
+      <div class="tile">
+        <div class="tile-label">Shares (últimos 10 posts)</div>
+        <div class="tile-value">113</div>
+      </div>
+    </div>
+    <div class="placeholder">Likes y comentarios de Facebook: pendientes de una revisión de permisos adicional en Meta.</div>
+  </section>
+
+  <section class="platform">
+    <div class="platform-head">
+      <span class="dot" style="background:var(--tt)"></span>
+      <h2>TikTok</h2>
+      <span class="handle">@geocito</span>
+    </div>
+    <div class="charts-row">
+      <div class="chart-col">
+        <div class="chart-title">Seguidores en el tiempo</div>
+        <div class="chart-empty" style="height:180px">
+      <svg viewBox="0 0 560 180" width="100%" height="180" preserveAspectRatio="none">
+        <circle cx="546" cy="90.0" r="5" fill="var(--tt)"/>
+      </svg>
+      <p>Primera medición (26 ago). Vuelve mañana para ver la tendencia.</p>
+    </div>
+      </div>
+      <div class="chart-col">
+        <div class="chart-title">Ganancia diaria de seguidores</div>
+        <div class="chart-empty" style="height:110px">
+      <p>Necesitamos al menos 2 días de historial para mostrar la ganancia diaria. Vuelve mañana.</p>
+    </div>
+      </div>
+    </div>
+    <div class="tiles">
+      <div class="tile">
+        <div class="tile-label">Likes totales</div>
+        <div class="tile-value">13 268</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Videos publicados</div>
+        <div class="tile-value">40</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Vistas (últimos 10 videos)</div>
+        <div class="tile-value">173 674</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Likes recientes</div>
+        <div class="tile-value">4 322</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Comentarios recientes</div>
+        <div class="tile-value">80</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Shares recientes</div>
+        <div class="tile-value">1 567</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Datos de la Graph API de Meta y la API de TikTok &middot; se actualiza una vez al día</span>
+    <span>1 día(s) de historial</span>
+  </footer>
+</div>
+<script>
+(function () {
+  document.querySelectorAll(".chart-wrap").forEach(function (wrap) {
+    var tip = wrap.querySelector(".chart-tip");
+    if (!tip) return;
+    wrap.querySelectorAll(".hit").forEach(function (hit) {
+      hit.addEventListener("mouseenter", function () {
+        tip.textContent = hit.dataset.date + " · " + hit.dataset.value;
+        tip.hidden = false;
+      });
+      hit.addEventListener("mouseleave", function () { tip.hidden = true; });
+    });
+  });
+})();
+</script>
