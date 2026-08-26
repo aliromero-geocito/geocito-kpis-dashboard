@@ -169,7 +169,7 @@
     <h1>Geocito &mdash; Panel de KPIs de redes sociales</h1>
     <div class="meta">
       <span class="status-pill status-good">Actualizado</span>
-      <span>Actualizado: 26/08/2026, 23:03 UTC</span>
+      <span>Actualizado: 26/08/2026, 23:35 UTC</span>
     </div>
   </header>
 
@@ -179,19 +179,25 @@
     <div class="hero-top">
       <div>
         <div class="hero-label">Seguidores combinados</div>
-        <div class="hero-number">13 889</div>
+        <div class="hero-number">13 899</div>
       </div>
       <div class="hero-legend">
         <span><span class="swatch" style="background:var(--ig)"></span>Instagram 3 322</span>
-        <span><span class="swatch" style="background:var(--fb)"></span>Facebook 5 310</span>
-        <span><span class="swatch" style="background:var(--tt)"></span>TikTok 5 257</span>
+        <span><span class="swatch" style="background:var(--fb)"></span>Facebook 5 312</span>
+        <span><span class="swatch" style="background:var(--tt)"></span>TikTok 5 265</span>
       </div>
     </div>
-    <div class="chart-empty" style="height:170px">
-      <svg viewBox="0 0 980 170" width="100%" height="170" preserveAspectRatio="none">
-        <circle cx="966" cy="85.0" r="5" fill="var(--accent)"/>
+    <div class="chart-wrap" data-chart="total">
+      <svg viewBox="0 0 980 170" width="100%" height="170" preserveAspectRatio="none" class="trend-svg">
+        <line x1="8" y1="16.0" x2="972" y2="16.0" class="grid-line"/><line x1="8" y1="79.0" x2="972" y2="79.0" class="grid-line"/><line x1="8" y1="142.0" x2="972" y2="142.0" class="grid-line"/>
+        <path d="M 8.0,129.8 L 972.0,28.2 L 972.0,142.0 L 8.0,142.0 Z" fill="var(--purple-100)"/>
+        <path d="M 8.0,129.8 L 972.0,28.2" fill="none" stroke="var(--accent)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="8.0" cy="129.8" r="3" class="pt" fill="var(--accent)"/><circle cx="972.0" cy="28.2" r="4.5" class="pt pt-last" fill="var(--accent)"/>
+        <text x="8.0" y="164" class="axis-label" text-anchor="start">26 ago</text><text x="972.0" y="164" class="axis-label" text-anchor="end">26 ago</text>
+        <circle cx="8.0" cy="129.8" r="12" class="hit" data-date="26 ago" data-value="13 889"/><circle cx="972.0" cy="28.2" r="12" class="hit" data-date="26 ago" data-value="13 899"/>
       </svg>
-      <p>Primera medición (26 ago). Vuelve mañana para ver la tendencia.</p>
+      <div class="chart-tip" hidden></div>
+      <div class="chart-delta delta-up">+10 vs. día anterior</div>
     </div>
   </div>
 
@@ -204,11 +210,17 @@
     <div class="charts-row">
       <div class="chart-col">
         <div class="chart-title">Seguidores en el tiempo</div>
-        <div class="chart-empty" style="height:180px">
-      <svg viewBox="0 0 560 180" width="100%" height="180" preserveAspectRatio="none">
-        <circle cx="546" cy="90.0" r="5" fill="var(--ig)"/>
+        <div class="chart-wrap" data-chart="ig-followers">
+      <svg viewBox="0 0 560 180" width="100%" height="180" preserveAspectRatio="none" class="trend-svg">
+        <line x1="8" y1="16.0" x2="552" y2="16.0" class="grid-line"/><line x1="8" y1="84.0" x2="552" y2="84.0" class="grid-line"/><line x1="8" y1="152.0" x2="552" y2="152.0" class="grid-line"/>
+        <path d="M 8.0,84.0 L 552.0,84.0 L 552.0,152.0 L 8.0,152.0 Z" fill="var(--ig-soft)"/>
+        <path d="M 8.0,84.0 L 552.0,84.0" fill="none" stroke="var(--ig)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="8.0" cy="84.0" r="3" class="pt" fill="var(--ig)"/><circle cx="552.0" cy="84.0" r="4.5" class="pt pt-last" fill="var(--ig)"/>
+        <text x="8.0" y="174" class="axis-label" text-anchor="start">26 ago</text><text x="552.0" y="174" class="axis-label" text-anchor="end">26 ago</text>
+        <circle cx="8.0" cy="84.0" r="12" class="hit" data-date="26 ago" data-value="3 322"/><circle cx="552.0" cy="84.0" r="12" class="hit" data-date="26 ago" data-value="3 322"/>
       </svg>
-      <p>Primera medición (26 ago). Vuelve mañana para ver la tendencia.</p>
+      <div class="chart-tip" hidden></div>
+      <div class="chart-delta delta-flat">0 vs. día anterior</div>
     </div>
       </div>
       <div class="chart-col">
@@ -221,15 +233,15 @@
     <div class="tiles">
       <div class="tile">
         <div class="tile-label">Alcance (24h)</div>
-        <div class="tile-value">5 709</div>
+        <div class="tile-value">5 799</div>
       </div>
       <div class="tile">
         <div class="tile-label">Cuentas con interacción</div>
-        <div class="tile-value">166</div>
+        <div class="tile-value">167</div>
       </div>
       <div class="tile">
         <div class="tile-label">Visitas al perfil</div>
-        <div class="tile-value">369</div>
+        <div class="tile-value">373</div>
       </div>
     </div>
   </section>
@@ -243,11 +255,17 @@
     <div class="charts-row">
       <div class="chart-col">
         <div class="chart-title">Seguidores en el tiempo</div>
-        <div class="chart-empty" style="height:180px">
-      <svg viewBox="0 0 560 180" width="100%" height="180" preserveAspectRatio="none">
-        <circle cx="546" cy="90.0" r="5" fill="var(--fb)"/>
+        <div class="chart-wrap" data-chart="fb-followers">
+      <svg viewBox="0 0 560 180" width="100%" height="180" preserveAspectRatio="none" class="trend-svg">
+        <line x1="8" y1="16.0" x2="552" y2="16.0" class="grid-line"/><line x1="8" y1="84.0" x2="552" y2="84.0" class="grid-line"/><line x1="8" y1="152.0" x2="552" y2="152.0" class="grid-line"/>
+        <path d="M 8.0,138.8 L 552.0,29.2 L 552.0,152.0 L 8.0,152.0 Z" fill="var(--fb-soft)"/>
+        <path d="M 8.0,138.8 L 552.0,29.2" fill="none" stroke="var(--fb)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="8.0" cy="138.8" r="3" class="pt" fill="var(--fb)"/><circle cx="552.0" cy="29.2" r="4.5" class="pt pt-last" fill="var(--fb)"/>
+        <text x="8.0" y="174" class="axis-label" text-anchor="start">26 ago</text><text x="552.0" y="174" class="axis-label" text-anchor="end">26 ago</text>
+        <circle cx="8.0" cy="138.8" r="12" class="hit" data-date="26 ago" data-value="5 310"/><circle cx="552.0" cy="29.2" r="12" class="hit" data-date="26 ago" data-value="5 312"/>
       </svg>
-      <p>Primera medición (26 ago). Vuelve mañana para ver la tendencia.</p>
+      <div class="chart-tip" hidden></div>
+      <div class="chart-delta delta-up">+2 vs. día anterior</div>
     </div>
       </div>
       <div class="chart-col">
@@ -260,7 +278,7 @@
     <div class="tiles">
       <div class="tile">
         <div class="tile-label">Shares (últimos 10 posts)</div>
-        <div class="tile-value">113</div>
+        <div class="tile-value">114</div>
       </div>
     </div>
     <div class="placeholder">Likes y comentarios de Facebook: pendientes de una revisión de permisos adicional en Meta.</div>
@@ -275,11 +293,17 @@
     <div class="charts-row">
       <div class="chart-col">
         <div class="chart-title">Seguidores en el tiempo</div>
-        <div class="chart-empty" style="height:180px">
-      <svg viewBox="0 0 560 180" width="100%" height="180" preserveAspectRatio="none">
-        <circle cx="546" cy="90.0" r="5" fill="var(--tt)"/>
+        <div class="chart-wrap" data-chart="tt-followers">
+      <svg viewBox="0 0 560 180" width="100%" height="180" preserveAspectRatio="none" class="trend-svg">
+        <line x1="8" y1="16.0" x2="552" y2="16.0" class="grid-line"/><line x1="8" y1="84.0" x2="552" y2="84.0" class="grid-line"/><line x1="8" y1="152.0" x2="552" y2="152.0" class="grid-line"/>
+        <path d="M 8.0,138.8 L 552.0,29.2 L 552.0,152.0 L 8.0,152.0 Z" fill="var(--tt-soft)"/>
+        <path d="M 8.0,138.8 L 552.0,29.2" fill="none" stroke="var(--tt)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="8.0" cy="138.8" r="3" class="pt" fill="var(--tt)"/><circle cx="552.0" cy="29.2" r="4.5" class="pt pt-last" fill="var(--tt)"/>
+        <text x="8.0" y="174" class="axis-label" text-anchor="start">26 ago</text><text x="552.0" y="174" class="axis-label" text-anchor="end">26 ago</text>
+        <circle cx="8.0" cy="138.8" r="12" class="hit" data-date="26 ago" data-value="5 257"/><circle cx="552.0" cy="29.2" r="12" class="hit" data-date="26 ago" data-value="5 265"/>
       </svg>
-      <p>Primera medición (26 ago). Vuelve mañana para ver la tendencia.</p>
+      <div class="chart-tip" hidden></div>
+      <div class="chart-delta delta-up">+8 vs. día anterior</div>
     </div>
       </div>
       <div class="chart-col">
@@ -292,7 +316,7 @@
     <div class="tiles">
       <div class="tile">
         <div class="tile-label">Likes totales</div>
-        <div class="tile-value">13 268</div>
+        <div class="tile-value">13 284</div>
       </div>
       <div class="tile">
         <div class="tile-label">Videos publicados</div>
@@ -300,11 +324,11 @@
       </div>
       <div class="tile">
         <div class="tile-label">Vistas (últimos 10 videos)</div>
-        <div class="tile-value">173 674</div>
+        <div class="tile-value">173 969</div>
       </div>
       <div class="tile">
         <div class="tile-label">Likes recientes</div>
-        <div class="tile-value">4 322</div>
+        <div class="tile-value">4 338</div>
       </div>
       <div class="tile">
         <div class="tile-label">Comentarios recientes</div>
@@ -312,14 +336,14 @@
       </div>
       <div class="tile">
         <div class="tile-label">Shares recientes</div>
-        <div class="tile-value">1 567</div>
+        <div class="tile-value">1 568</div>
       </div>
     </div>
   </section>
 
   <footer>
     <span>Datos de la Graph API de Meta y la API de TikTok &middot; se actualiza una vez al día</span>
-    <span>1 día(s) de historial</span>
+    <span>2 día(s) de historial</span>
   </footer>
 </div>
 <script>
