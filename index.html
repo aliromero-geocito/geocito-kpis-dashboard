@@ -105,19 +105,36 @@
   .seg-label { font-size: 11px; font-weight: 600; fill: var(--white); font-family: "Public Sans", sans-serif; }
   .swatch { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
 
+  .tabs {
+    display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;
+  }
+  .tab-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: "Public Sans", sans-serif; font-size: 0.9rem; font-weight: 600;
+    color: var(--ink-secondary); background: var(--surface); border: 1px solid var(--border);
+    border-radius: 999px; padding: 0.5rem 1.1rem; cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .tab-btn:hover { border-color: var(--tab-color); color: var(--ink); }
+  .tab-btn.active {
+    color: var(--white); background: var(--tab-color); border-color: var(--tab-color);
+  }
+  .tab-btn.active .dot { background: var(--white) !important; }
+
   section.platform {
     background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
     overflow: hidden; margin-bottom: 1.5rem;
-    opacity: 0; transform: translateY(10px);
-    animation: rise 0.5s ease forwards;
   }
-  section.platform:nth-of-type(1) { animation-delay: 0.03s; }
-  section.platform:nth-of-type(2) { animation-delay: 0.09s; }
-  section.platform:nth-of-type(3) { animation-delay: 0.15s; }
-  @keyframes rise { to { opacity: 1; transform: none; } }
+  section.platform:not(.active) { display: none; }
+  section.platform.active {
+    animation: rise 0.35s ease forwards;
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) {
-    section.platform { animation: none; opacity: 1; transform: none; }
+    section.platform.active { animation: none; }
   }
+
+  .count-up { font-variant-numeric: tabular-nums; }
 
   .platform-head {
     display: flex; align-items: center; gap: 0.75rem; padding: 1.1rem 1.5rem;
@@ -183,7 +200,7 @@
     <div class="hero-top">
       <div>
         <div class="hero-label">Seguidores combinados</div>
-        <div class="hero-number">13 899</div>
+        <div class="hero-number count-up" data-target="13899">13 899</div>
       </div>
       <div class="hero-legend">
         <span><span class="swatch" style="background:var(--ig)"></span>Instagram 3 322</span>
@@ -207,7 +224,19 @@
     </svg>
   </div>
 
-  <section class="platform">
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="instagram" style="--tab-color:var(--ig)" role="tab" aria-selected="true">
+      <span class="dot" style="background:var(--ig)"></span>Instagram
+    </button>
+    <button class="tab-btn" data-tab="facebook" style="--tab-color:var(--fb)" role="tab" aria-selected="false">
+      <span class="dot" style="background:var(--fb)"></span>Facebook
+    </button>
+    <button class="tab-btn" data-tab="tiktok" style="--tab-color:var(--tt)" role="tab" aria-selected="false">
+      <span class="dot" style="background:var(--tt)"></span>TikTok
+    </button>
+  </div>
+
+  <section class="platform active" data-platform="instagram">
     <div class="platform-head">
       <span class="dot" style="background:var(--ig)"></span>
       <h2>Instagram</h2>
@@ -244,20 +273,20 @@
     <div class="tiles">
       <div class="tile">
         <div class="tile-label">Alcance (24h)</div>
-        <div class="tile-value">5 799</div>
+        <div class="tile-value count-up" data-target="5799">5 799</div>
       </div>
       <div class="tile">
         <div class="tile-label">Cuentas con interacción</div>
-        <div class="tile-value">167</div>
+        <div class="tile-value count-up" data-target="167">167</div>
       </div>
       <div class="tile">
         <div class="tile-label">Visitas al perfil</div>
-        <div class="tile-value">373</div>
+        <div class="tile-value count-up" data-target="373">373</div>
       </div>
     </div>
   </section>
 
-  <section class="platform">
+  <section class="platform" data-platform="facebook">
     <div class="platform-head">
       <span class="dot" style="background:var(--fb)"></span>
       <h2>Facebook</h2>
@@ -294,13 +323,13 @@
     <div class="tiles">
       <div class="tile">
         <div class="tile-label">Shares (últimos 10 posts)</div>
-        <div class="tile-value">114</div>
+        <div class="tile-value count-up" data-target="114">114</div>
       </div>
     </div>
     <div class="placeholder">Likes y comentarios de Facebook: pendientes de una revisión de permisos adicional en Meta.</div>
   </section>
 
-  <section class="platform">
+  <section class="platform" data-platform="tiktok">
     <div class="platform-head">
       <span class="dot" style="background:var(--tt)"></span>
       <h2>TikTok</h2>
@@ -337,27 +366,27 @@
     <div class="tiles">
       <div class="tile">
         <div class="tile-label">Likes totales</div>
-        <div class="tile-value">13 284</div>
+        <div class="tile-value count-up" data-target="13284">13 284</div>
       </div>
       <div class="tile">
         <div class="tile-label">Videos publicados</div>
-        <div class="tile-value">40</div>
+        <div class="tile-value count-up" data-target="40">40</div>
       </div>
       <div class="tile">
         <div class="tile-label">Vistas (últimos 10 videos)</div>
-        <div class="tile-value">173 978</div>
+        <div class="tile-value count-up" data-target="173978">173 978</div>
       </div>
       <div class="tile">
         <div class="tile-label">Likes recientes</div>
-        <div class="tile-value">4 338</div>
+        <div class="tile-value count-up" data-target="4338">4 338</div>
       </div>
       <div class="tile">
         <div class="tile-label">Comentarios recientes</div>
-        <div class="tile-value">80</div>
+        <div class="tile-value count-up" data-target="80">80</div>
       </div>
       <div class="tile">
         <div class="tile-label">Shares recientes</div>
-        <div class="tile-value">1 568</div>
+        <div class="tile-value count-up" data-target="1568">1 568</div>
       </div>
     </div>
   </section>
@@ -379,6 +408,44 @@
       });
       hit.addEventListener("mouseleave", function () { tip.hidden = true; });
     });
+  });
+
+  // Tabs: one platform section visible at a time.
+  var tabs = document.querySelectorAll(".tab-btn");
+  tabs.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      tabs.forEach(function (b) { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      document.querySelectorAll("section.platform").forEach(function (sec) {
+        sec.classList.toggle("active", sec.dataset.platform === btn.dataset.tab);
+      });
+    });
+  });
+
+  // Count-up animation on the headline numbers.
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function formatNum(n) {
+    return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
+  function animateValue(el, target, duration) {
+    var startTime = null;
+    function step(now) {
+      if (startTime === null) startTime = now;
+      var progress = Math.min((now - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = formatNum(target * eased);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = formatNum(target);
+    }
+    requestAnimationFrame(step);
+  }
+  document.querySelectorAll("[data-target]").forEach(function (el, i) {
+    var target = parseFloat(el.dataset.target);
+    if (isNaN(target)) return;
+    if (reduceMotion) { el.textContent = formatNum(target); return; }
+    el.textContent = "0";
+    setTimeout(function () { animateValue(el, target, 900); }, i * 25);
   });
 })();
 </script>
